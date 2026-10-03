@@ -133,7 +133,7 @@ const content: ProblemContent = {
     { kind: 'good', cost: 20, text: { pt: 'k pode ser maior que o número de valores distintos?', en: 'Can k exceed the number of distinct values?' }, reply: { pt: 'Não, k nunca passa do número de valores distintos.', en: 'No, k never exceeds the number of distinct values.' } },
     { kind: 'stated', cost: 15, text: { pt: 'Qual o tamanho máximo de nums?', en: 'What is the maximum size of nums?' }, reply: { pt: 'Está nas constraints: até 200000.', en: 'It is in the constraints: up to 200000.' } },
     { kind: 'stated', cost: 10, text: { pt: 'k pode ser 0?', en: 'Can k be 0?' }, reply: { pt: 'Está nas constraints: k >= 1.', en: 'It is in the constraints: k >= 1.' } },
-    { kind: 'stated', cost: 15, text: { pt: 'Os valores de nums são inteiros?', en: 'Are the values in nums integers?' }, reply: { pt: 'Sim, a assinatura diz int[].', en: 'Yes, the signature says int[].' } },
+    { kind: 'good', cost: 20, text: { pt: 'Os valores de nums são inteiros?', en: 'Are the values in nums integers?' }, reply: { pt: 'Sim, são todos inteiros.', en: 'Yes, they are all integers.' } },
     { kind: 'noise', cost: 30, text: { pt: 'Os números podem vir como texto e precisar de parsing?', en: 'Can the numbers arrive as text and need parsing?' }, reply: { pt: 'Não, chegam como array de inteiros já.', en: 'No, they arrive as an array of integers already.' } },
     { kind: 'noise', cost: 30, text: { pt: 'Preciso lidar com entrada chegando em streaming?', en: 'Do I need to handle input arriving as a stream?' }, reply: { pt: 'Não, é um array estático em memória para essa versão.', en: 'No, it is a static in-memory array for this version.' } },
   ],

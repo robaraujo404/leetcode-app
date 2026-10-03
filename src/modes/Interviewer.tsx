@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import type { Problem } from '../content'
-import { Button, Card } from '../ui/primitives'
+import { BottomBar, Button, Card } from '../ui/primitives'
 import { useT, useUI } from '../lib/i18n'
 import { shuffle } from '../lib/shuffle'
 
@@ -35,6 +35,16 @@ export function InterviewerMode({ problem, onFinish }: { problem: Problem; onFin
     <div className="flex flex-col gap-4 pb-28">
       <Card>
         <p className="text-[14px] text-slate-700 dark:text-slate-200">{problem.prompt}</p>
+        <div className="mt-2 flex flex-wrap gap-1.5">
+          {problem.constraints.map((con, i) => (
+            <span
+              key={i}
+              className="rounded-full bg-slate-100 px-2 py-0.5 text-[11px] text-slate-500 dark:bg-slate-800 dark:text-slate-400"
+            >
+              {con}
+            </span>
+          ))}
+        </div>
       </Card>
       <div className="flex items-center justify-between text-sm">
         <span className="text-slate-500 dark:text-slate-400">
@@ -71,11 +81,11 @@ export function InterviewerMode({ problem, onFinish }: { problem: Problem; onFin
           )
         })}
       </div>
-      <div className="fixed inset-x-0 bottom-0 flex justify-center px-4 pb-[max(1rem,env(safe-area-inset-bottom))]">
-        <Button size="lg" className="w-full max-w-md" onClick={finish} disabled={done}>
+      <BottomBar className="px-4 pb-[max(1rem,env(safe-area-inset-bottom))]">
+        <Button size="lg" className="w-full" onClick={finish} disabled={done}>
           {ui.finish}
         </Button>
-      </div>
+      </BottomBar>
     </div>
   )
 }
