@@ -1,0 +1,32 @@
+@import 'tailwindcss';
+
+:root {
+  color-scheme: light dark;
+}
+
+html,
+body {
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  overscroll-behavior-y: none;
+}
+
+body {
+  background: #f8fafc;
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background: #020617;
+  }
+}
+
+#root {
+  min-height: 100dvh;
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+}
