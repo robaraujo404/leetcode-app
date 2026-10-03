@@ -2,6 +2,7 @@ import { PROBLEM_BY_ID } from '../content'
 import { useNav } from '../lib/nav'
 import { useUI } from '../lib/i18n'
 import { Card, Screen } from '../ui/primitives'
+import { AudioButton } from '../ui/AudioButton'
 import { MODE_IDS, getMastery } from '../lib/storage'
 
 export function ModeHub({ problemId }: { problemId: number }) {
@@ -13,7 +14,10 @@ export function ModeHub({ problemId }: { problemId: number }) {
     <Screen title={`${problem.id}. ${problem.title}`}>
       <div className="flex flex-col gap-4">
         <Card>
-          <p className="text-[14px] text-slate-700 dark:text-slate-200">{problem.prompt}</p>
+          <div className="flex items-start gap-2">
+            <p className="flex-1 text-[14px] text-slate-700 dark:text-slate-200">{problem.prompt}</p>
+            <AudioButton slug={problem.slug} />
+          </div>
           <div className="mt-2 flex flex-wrap gap-1.5">
             {problem.constraints.map((c, i) => (
               <span

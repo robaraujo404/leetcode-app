@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import type { Problem } from '../content'
 import { BottomBar, Button, Card } from '../ui/primitives'
+import { AudioButton } from '../ui/AudioButton'
 import { useT, useUI } from '../lib/i18n'
 import { shuffle } from '../lib/shuffle'
 
@@ -34,7 +35,10 @@ export function InterviewerMode({ problem, onFinish }: { problem: Problem; onFin
   return (
     <div className="flex flex-col gap-4 pb-28">
       <Card>
-        <p className="text-[14px] text-slate-700 dark:text-slate-200">{problem.prompt}</p>
+        <div className="flex items-start gap-2">
+          <p className="flex-1 text-[14px] text-slate-700 dark:text-slate-200">{problem.prompt}</p>
+          <AudioButton slug={problem.slug} />
+        </div>
         <div className="mt-2 flex flex-wrap gap-1.5">
           {problem.constraints.map((con, i) => (
             <span
