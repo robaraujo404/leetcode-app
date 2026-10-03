@@ -34,9 +34,13 @@ pnpm verify 7 12   # just these ids
 
 ```bash
 pnpm install
-pnpm dev       # http://localhost:5173
-pnpm build     # production build + PWA assets in dist/
-pnpm preview   # serve the production build locally
+pnpm dev           # http://localhost:5173, hot reload
+pnpm dev:lan       # same, but reachable from other devices on the Wi-Fi
+pnpm build         # production build + PWA assets in dist/
+pnpm preview       # serve the production build locally
+pnpm preview:lan   # same, but reachable from other devices on the Wi-Fi
 ```
 
-Pushing to `main` builds and deploys `dist/` to GitHub Pages via `.github/workflows/deploy.yml`.
+No commit needed to try a change: run `pnpm dev:lan`, then open `http://<your-mac's-LAN-IP>:5173` on your phone (same Wi-Fi). `pnpm dev` doesn't register the service worker, so install/offline behavior only shows up under `pnpm build && pnpm preview:lan` — use that to check the PWA install flow specifically.
+
+Pushing to `main` builds and deploys `dist/` to GitHub Pages via `.github/workflows/deploy.yml`, for a stable installable URL.

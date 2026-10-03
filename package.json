@@ -5,9 +5,11 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "dev:lan": "vite --host",
     "build": "tsc -b && vite build",
     "lint": "oxlint",
     "preview": "vite preview",
+    "preview:lan": "vite preview --host",
     "verify": "tsx scripts/verify.ts"
   },
   "dependencies": {
