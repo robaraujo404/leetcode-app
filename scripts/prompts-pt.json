@@ -1,0 +1,22 @@
+{
+  "1": "Você recebe uma coleção de rotas de ônibus. Cada rota contém as paradas visitadas repetidamente por uma linha de ônibus. Dadas uma parada de origem e uma de destino, retorne o número mínimo de ônibus necessários para viajar da origem até o destino. Você pode fazer baldeação entre rotas em paradas compartilhadas.",
+  "2": "Uma grade inicialmente vazia recebe adições de terra, uma coordenada por vez. Depois de cada adição, retorne o número atual de componentes de terra conectados. As células se conectam na vertical e na horizontal.",
+  "3": "Implemente um calendário que aceita pedidos de reserva. Uma reserva é representada por um intervalo semiaberto início, fim. A operação book de start e end retorna se a reserva pode ser aceita.",
+  "4": "Implemente duas funções para uma cartela de bingo de 3 linhas por 9 colunas. isValid de card retorna se uma cartela segue as regras: cada linha contém exatamente cinco números e quatro células vazias; a coluna 0 sorteia de 1 a 10, a coluna 1 de 11 a 20, e assim por diante até a coluna 8, que sorteia de 81 a 90; um número não vazio aparece só uma vez na cartela. Use 0 para representar uma célula vazia. generate de random retorna uma cartela que isValid aceita. random é uma fonte de aleatoriedade injetada para que os testes sejam determinísticos.",
+  "5": "Uma lista de palavras está ordenada segundo um alfabeto desconhecido. Infira uma ordenação de caracteres consistente com a ordem das palavras observada. Quando mais de um caractere pode vir a seguir, escolha o menor na ordem alfabética normal.",
+  "6": "Projete um cache de capacidade fixa que suporte get de key e put de key e value. As duas operações devem rodar em tempo esperado O de 1. Ler ou atualizar uma entrada marca ela como usada recentemente.",
+  "7": "Uma grade binária contém exatamente dois componentes de terra. Você pode converter células de água em terra. Retorne o número mínimo de células de água que precisam ser convertidas para conectar os dois componentes. A adjacência é vertical ou horizontal.",
+  "8": "Dada uma grade binária, retorne o número de componentes de terra conectados. As células se conectam na vertical e na horizontal.",
+  "9": "Dada uma matriz binária quadrada cujo lado é uma potência de dois, construa recursivamente uma quadtree. Uma região uniforme vira uma folha; caso contrário, a região é dividida em quatro quadrantes iguais.",
+  "10": "Existem numCourses cursos e relações de pré-requisito. Retorne uma ordem em que todos os cursos possam ser concluídos. Quando mais de um curso pode ser o próximo, pegue o de menor número primeiro.",
+  "11": "Você recebe equações de conversão aos pares, como A dividido por B igual a um valor. Para cada consulta X dividido por Y, retorne o fator de conversão implícito, quando ele puder ser determinado a partir das equações conhecidas.",
+  "12": "Dados os intervalos de reuniões, retorne o número mínimo de salas necessário para que todas as reuniões possam acontecer.",
+  "13": "Dada uma grade binária quadrada, retorne o comprimento do caminho mais curto da célula superior esquerda até a célula inferior direita, passando por células abertas. O movimento é permitido para qualquer uma das oito células vizinhas.",
+  "14": "Projete um contador com as operações hit de timestamp e getHits de timestamp. getHits de t retorna o número de hits registrados na janela dos 300 segundos anteriores terminando em t.",
+  "15": "Dada uma grade binária, você pode transformar no máximo uma célula de água em terra. Retorne a maior área de terra conectada que é possível obter.",
+  "16": "Dadas passagens aéreas direcionadas, construa um itinerário que comece em JFK e use cada passagem exatamente uma vez. Quando mais de um itinerário completo é possível, escolha o lexicograficamente menor.",
+  "17": "As tarefas devem ser executadas na ordem dada. Repetir o mesmo tipo de tarefa exige um intervalo de space dias inteiros entre as execuções. Dias ociosos podem ser inseridos. Retorne o primeiro dia em que todas as tarefas estarão concluídas.",
+  "18": "Dada uma lista de intervalos, mescle todos os intervalos sobrepostos e retorne os intervalos resultantes, sem sobreposição.",
+  "19": "Dado um array de inteiros e um inteiro k, retorne os k valores mais frequentes, do mais para o menos frequente. Entre valores com a mesma frequência, o menor valor vem primeiro.",
+  "20": "Projete um sistema de arquivos hierárquico em memória que suporte ls de path, mkdir de path, addContentToFile de filePath e content, e readContentFromFile de filePath."
+}

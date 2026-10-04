@@ -55,8 +55,8 @@ const content: ProblemContent = {
 
   steps: [
     { indent: 0, text: { pt: 'Se source == target, retorna 0', en: 'If source == target, return 0' } },
-    { indent: 0, text: { pt: 'Monta o mapa parada → rotas que passam nela', en: 'Build the map stop → routes that visit it' } },
-    { indent: 0, text: { pt: 'Fronteira = [source]; marca source como parada visitada; buses = 0', en: 'Frontier = [source]; mark source as a visited stop; buses = 0' } },
+    { indent: 0, group: 1, text: { pt: 'Monta o mapa parada → rotas que passam nela', en: 'Build the map stop → routes that visit it' } },
+    { indent: 0, group: 1, text: { pt: 'Fronteira = [source]; marca source como parada visitada; buses = 0', en: 'Frontier = [source]; mark source as a visited stop; buses = 0' } },
     { indent: 0, text: { pt: 'Enquanto a fronteira não está vazia:', en: 'While the frontier is not empty:' } },
     { indent: 1, text: { pt: 'buses++; próxima fronteira = []', en: 'buses++; next frontier = []' } },
     { indent: 1, text: { pt: 'Para cada parada da fronteira:', en: 'For each stop in the frontier:' } },

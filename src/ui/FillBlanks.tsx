@@ -1,6 +1,6 @@
 // Parsons level 4 ("faded"): real code shown read-only, with one token per
 // blank hidden behind a chip the user fills in from a shuffled option list.
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import type { Blank } from '../content/schema'
 import { BottomBar, Button } from './primitives'
 import { useUI } from '../lib/i18n'
@@ -10,16 +10,27 @@ export function FillBlanks({
   source,
   blanks,
   onDone,
+  initialAnswers,
+  onChange,
 }: {
   source: string
   blanks: Blank[]
   onDone: (correct: boolean) => void
+  /** Restores previously chosen answers (e.g. when switching back to level 4). */
+  initialAnswers?: Record<number, string>
+  /** Fires on every answer change, so a parent can cache it for later restoration. */
+  onChange?: (answers: Record<number, string>) => void
 }) {
   const ui = useUI()
   const lines = source.split('\n')
-  const [answers, setAnswers] = useState<Record<number, string>>({})
+  const [answers, setAnswers] = useState<Record<number, string>>(initialAnswers ?? {})
   const [checked, setChecked] = useState(false)
   const [options] = useState(() => blanks.map((b) => shuffle([b.token, ...b.options])))
+
+  useEffect(() => {
+    onChange?.(answers)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [answers])
 
   const byLine = new Map(blanks.map((b, i) => [b.line, i]))
   const allAnswered = blanks.every((_, i) => answers[i] !== undefined)

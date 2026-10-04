@@ -42,6 +42,10 @@ export type PatternId =
 export interface Step {
   text: Bi
   indent: number
+  /** When set and shared with the immediately adjacent step(s) at the same indent,
+   *  those steps may appear in any relative order among themselves — they're
+   *  independent (neither reads what the other writes). Must be contiguous. */
+  group?: number
 }
 
 /** A wrong step mixed in at level 3. `why` is shown when the user picks it. */

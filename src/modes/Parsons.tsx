@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useMemo, useRef, useState } from 'react'
 import type { Problem } from '../content'
 import { BankOrderPuzzle, type Tile } from '../ui/BankOrderPuzzle'
 import { FillBlanks } from '../ui/FillBlanks'
@@ -6,11 +6,33 @@ import { Chip } from '../ui/primitives'
 import { useT, useUI } from '../lib/i18n'
 import { shuffle } from '../lib/shuffle'
 
+/** Merges contiguous steps sharing the same `group` into one block the checker
+ *  accepts in any internal order (see schema.ts `Step.group`). */
+function toBlocks(items: { id: string; group?: number }[]): string[][] {
+  const blocks: string[][] = []
+  let currentGroup: number | undefined
+  for (const item of items) {
+    if (item.group !== undefined && item.group === currentGroup) {
+      blocks[blocks.length - 1].push(item.id)
+    } else {
+      blocks.push([item.id])
+    }
+    currentGroup = item.group
+  }
+  return blocks
+}
+
 export function ParsonsMode({ problem, onFinish }: { problem: Problem; onFinish: (correct: boolean) => void }) {
   const t = useT()
   const ui = useUI()
   const [level, setLevel] = useState(1)
   const c = problem.content
+
+  // Switching levels remounts the puzzle below (fresh shuffle each time would
+  // otherwise lose progress), so cache each level's arrangement here and feed
+  // it back in as the initial state when the user returns to that level.
+  const puzzleCache = useRef<Record<number, { bank: Tile[]; solution: Tile[] }>>({})
+  const blanksCache = useRef<Record<number, string>>({})
 
   const puzzle = useMemo(() => {
     if (level === 4) return null
@@ -25,7 +47,7 @@ export function ParsonsMode({ problem, onFinish }: { problem: Problem; onFinish:
       }))
       return {
         tiles: shuffle([...correctTiles, ...distractorTiles]),
-        correctOrderIds: correctTiles.map((x) => x.id),
+        correctOrder: correctTiles.map((x) => [x.id]),
         indentMode: false,
         monospace: true,
       }
@@ -43,7 +65,7 @@ export function ParsonsMode({ problem, onFinish }: { problem: Problem; onFinish:
         : []
     return {
       tiles: shuffle([...stepTiles, ...distractorTiles]),
-      correctOrderIds: stepTiles.map((x) => x.id),
+      correctOrder: toBlocks(c.steps.map((s, i) => ({ id: `step${i}`, group: s.group }))),
       indentMode: level >= 2,
       monospace: false,
     }
@@ -59,14 +81,28 @@ export function ParsonsMode({ problem, onFinish }: { problem: Problem; onFinish:
         ))}
       </div>
       {level === 4 ? (
-        <FillBlanks key={`${problem.id}-4`} source={c.source} blanks={c.blanks} onDone={onFinish} />
+        <FillBlanks
+          key={`${problem.id}-4`}
+          source={c.source}
+          blanks={c.blanks}
+          initialAnswers={blanksCache.current}
+          onChange={(answers) => {
+            blanksCache.current = answers
+          }}
+          onDone={onFinish}
+        />
       ) : puzzle ? (
         <BankOrderPuzzle
           key={`${problem.id}-${level}`}
           tiles={puzzle.tiles}
-          correctOrderIds={puzzle.correctOrderIds}
+          correctOrder={puzzle.correctOrder}
           indentMode={puzzle.indentMode}
           monospace={puzzle.monospace}
+          initialBank={puzzleCache.current[level]?.bank}
+          initialSolution={puzzleCache.current[level]?.solution}
+          onChange={(bank, solution) => {
+            puzzleCache.current[level] = { bank, solution }
+          }}
           onDone={onFinish}
         />
       ) : null}

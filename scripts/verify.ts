@@ -277,7 +277,25 @@ function checkShape(problem: Problem, content: ProblemContent, r: Report) {
   if (content.steps[0]?.indent !== 0) r.fail('steps[0] must have indent 0')
   content.steps.forEach((s, i) => {
     if (i > 0 && s.indent > content.steps[i - 1].indent + 1) r.fail(`steps[${i}] indents more than one level deeper than the previous step`)
+    // A `group` marks steps the checker accepts in any order among themselves (see
+    // schema.ts); that only makes sense for steps that are genuinely interchangeable,
+    // so require them to be contiguous and at the same nesting depth.
+    if (s.group !== undefined) {
+      const prev = content.steps[i - 1]
+      const next = content.steps[i + 1]
+      const adjacent = (o?: typeof s) => o?.group === s.group
+      if (!adjacent(prev) && !adjacent(next)) r.fail(`steps[${i}]: group ${s.group} has no adjacent step sharing it`)
+      if (adjacent(prev) && prev.indent !== s.indent) r.fail(`steps[${i}]: group ${s.group} spans steps at different indents`)
+    }
   })
+  const groupIndexes = new Map<number, number[]>()
+  content.steps.forEach((s, i) => {
+    if (s.group !== undefined) groupIndexes.set(s.group, [...(groupIndexes.get(s.group) ?? []), i])
+  })
+  for (const [g, idxs] of groupIndexes) {
+    const span = idxs[idxs.length - 1] - idxs[0] + 1
+    if (span !== idxs.length) r.fail(`group ${g}: steps ${idxs.join(',')} are not contiguous`)
+  }
   if (content.stepDistractors.length < 2) r.fail('want at least 2 stepDistractors')
 
   if (content.blanks.length < 3) r.fail('want at least 3 blanks')
